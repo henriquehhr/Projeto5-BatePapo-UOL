@@ -94,15 +94,35 @@ footer ion-icon {
     height: 26px;
 }
 
+.dark-overlay {
+    transition: all .7s ease;
+}
+
+.dark-overlay--active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.7;
+    z-index:1;
+}
+
 aside {
     padding: 25px 17px;
     position: fixed;
     top: 0;
-    right: 0;
+    right: -295px;
     bottom: 0;
-    z-index: 1;
+    z-index: 2;
     background-color: #FFFFFF;
     width: 259px;
+    transition: all .5s ease;
+}
+
+aside.aside--slide {
+    right: 0;
 }
 
 aside > p {
