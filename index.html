@@ -4,11 +4,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>Bate-papo UOL</title>
 </head>
 <body>
-    
+    <header>
+        <img src="images/logo.png" alt="logo do UOL">
+        <ion-icon name="people"></ion-icon>        
+    </header>
+    <main>
+        <div class="message message--status">
+            <p><span class="message__time">(09:21:45) </span><span class="message__content"><strong>João</strong> entra na sala...</span></p>
+        </div>
+        <div class="message">
+            <p><span class="message__time">(09:21:45) </span><span class="message__content"><strong>João </strong>para <strong>Todos:</strong> Bom dia</span></p>
+        </div>
+        <div class="message">
+            <p><span class="message__time">(09:21:45) </span><span class="message__content"><strong>Maria </strong>para <strong>João:</strong> Oi João :)</span></p>
+        </div>
+        <div class="message message--DM">
+            <p><span class="message__time">(09:21:45) </span><span class="message__content"><strong>João </strong>reservadamente para <strong>Maria</strong>: Oi gatinha quer tc?</span></p>
+        </div>
+        <div class="message message--status">
+            <p><span class="message__time">(09:21:45) </span><span class="message__content"><strong>Maria</strong> sai da sala...</span></p>
+        </div>
+    </main>
+    <footer>
+        <input type="text" name="" id="" placeholder="Escreva aqui...">
+        <ion-icon name="paper-plane-outline"></ion-icon>        
+    </footer>
+    <aside class="hidden">
+        <p>Escolha um contato para enviar mensagem:</p>
+        <section class="contacts">
+            <div>
+                <ion-icon name="people"></ion-icon>
+                <p>Todos</p>
+                <ion-icon name="checkmark-sharp" class="checkmark"></ion-icon>                                
+            </div>
+            <div>
+                <ion-icon name="person-circle"></ion-icon>
+                <p>João</p>
+                <ion-icon name="checkmark-sharp" class="checkmark hidden"></ion-icon>                                
+            </div>
+            <div>
+                <ion-icon name="person-circle"></ion-icon>
+                <p>Maria</p>
+                <ion-icon name="checkmark-sharp" class="checkmark hidden"></ion-icon>                                
+            </div>
+        </section>
+        <p>Escolha a visibilidade:</p>
+        <section class="visibility">
+            <div>
+                <ion-icon name="lock-open"></ion-icon>
+                <p>Público</p>
+                <ion-icon name="checkmark-sharp" class="checkmark"></ion-icon> 
+            </div>
+            <div>
+                <ion-icon name="lock-closed"></ion-icon>
+                <p>Reservadamente</p>
+                <ion-icon name="checkmark-sharp" class="hidden checkmark"></ion-icon>
+            </div>
+        </section>
+    </aside>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
+
+<!--
+<ion-icon name="people"></ion-icon>
+<ion-icon name="paper-plane-outline"></ion-icon>
+<ion-icon name="person-circle"></ion-icon>
+<ion-icon name="lock-closed"></ion-icon>
+<ion-icon name="lock-open"></ion-icon>
+<ion-icon name="checkmark-sharp"></ion-icon> -->

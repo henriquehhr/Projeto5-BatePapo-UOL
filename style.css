@@ -1,0 +1,158 @@
+* {
+    box-sizing: border-box;
+}
+
+.hidden {
+    display: none;
+}
+
+strong {
+    font-weight: bold;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    background-color: #FFFFFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+header img {
+    width: 75px;
+    height: 53px;
+}
+
+header ion-icon {
+    width: 45px;
+    height: 45px;
+}
+
+main {
+    background-color: #F3F3F3;
+    margin-top: 106px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.message {
+    display: flex;
+    padding: 8px;
+    border-radius: 2px;
+    background-color: #FFFFFF;
+}
+
+.message--status {
+    background-color: #DCDCDC;
+}
+
+.message--DM {
+    background-color: #FFDEDE;
+}
+
+.message p {
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.message__time {
+    color: #9D9D9D;
+}
+
+footer {
+    background-color: #FFFFFF;
+    padding: 27px 18px;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+footer input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: Roboto;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+footer input::placeholder {
+    font-style: italic;
+}
+
+footer ion-icon {
+    width: 26px;
+    height: 26px;
+}
+
+aside {
+    padding: 25px 17px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: #FFFFFF;
+    width: 259px;
+}
+
+aside > p {
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+aside section {
+    margin-bottom: 30px;
+}
+
+aside section div {
+    margin-bottom: 12px;
+}
+
+aside section ion-icon:first-of-type {
+    margin-right: 7px;
+}
+
+aside .contacts ion-icon {
+    width: 25px;
+    height: 25px;
+}
+
+aside .visibility ion-icon {
+    width: 22px;
+    height: 22px;
+}
+
+aside .checkmark {
+    width: 10px;
+    height: 10px;
+    color: #28BB25;
+}
+
+aside .contacts p, aside .visibility p {
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+aside .visibility div, aside .contacts div {
+    display:flex;
+    flex-grow: 1;
+}
+
+aside div .checkmark {
+    margin-left: auto;
+}
