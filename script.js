@@ -17,3 +17,27 @@ function closeSidebar(){
         }
     }, 700);
 }
+
+function intializeServerConection(){
+    axios.post('http://mock-api.driven.com.br/api/v4/uol/participants', {
+        name: 'dhfksdhfsdk'
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+}
+
+function getMessages(){
+    let promisse = axios.get("http://mock-api.driven.com.br/api/v4/uol/messages");
+    promisse.then(renderMessages);
+}
+
+function renderMessages(messages){
+    console.log(messages.data);
+}
+
+getMessages();
+intializeServerConection();
