@@ -29,6 +29,7 @@ function enterChat(){
         console.log(response);
         setInterval(maintainServerConnection, 5000);
         getChatMessages();
+        getOnlineChatUsers();
       })
       .catch(function (error) {
         console.log(error);
@@ -90,6 +91,35 @@ function renderMessageHTMLFormat(message) {
 
     div.append(pMessage);
     return div;
+}
+
+function getOnlineChatUsers(){
+    let promisse = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants");
+    promisse.then(renderOnlineChatUsers);
+}
+
+function renderOnlineChatUsers(chatUsers){
+    const contacts = document.querySelector(".contacts");
+    contacts.innerHTML = `
+    <li>
+        <ion-icon name="people"></ion-icon>
+        <p>Todos</p>
+        <ion-icon name="checkmark-sharp" class="checkmark"></ion-icon>                                
+    </li>`;
+    for(let i = 0; i < chatUsers.data.length; i++){
+        if(chatUsers.data[i].name !== username){
+            contacts.innerHTML += renderChatUserHTMLFormat(chatUsers.data[i]);
+        }
+    }
+}
+
+function renderChatUserHTMLFormat(chatUser){
+    return `
+    <li>
+        <ion-icon name="person-circle"></ion-icon>
+        <p>${chatUser.name}</p>
+        <ion-icon name="checkmark-sharp" class="checkmark hidden"></ion-icon>                                
+    </li>`; 
 }
 
 enterChat();

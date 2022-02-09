@@ -141,15 +141,15 @@ aside > p {
     margin-bottom: 30px;
 }
 
-aside section {
+aside ul {
     margin-bottom: 30px;
 }
 
-aside section div {
+aside ul li {
     margin-bottom: 12px;
 }
 
-aside section ion-icon:first-of-type {
+aside ul ion-icon:first-of-type {
     margin-right: 7px;
 }
 
@@ -175,11 +175,11 @@ aside .contacts p, aside .visibility p {
     line-height: 19px;
 }
 
-aside .visibility div, aside .contacts div {
+aside .visibility li, aside .contacts li {
     display:flex;
     flex-grow: 1;
 }
 
-aside div .checkmark {
+aside li .checkmark {
     margin-left: auto;
 }
