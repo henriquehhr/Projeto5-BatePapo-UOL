@@ -1,6 +1,6 @@
 const sidebar = document.querySelector("aside");
 const darkOverlay = document.querySelector(".dark-overlay");
-
+let username;
 
 function openSidebar(){
     sidebar.classList.add("aside--slide");
@@ -18,18 +18,25 @@ function closeSidebar(){
     }, 700);
 }
 
-/*
-function intializeServerConection(){
+function enterChat(){
+    username = prompt("Qual o seu lindo nome?");
     axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {
-        name: 'dhfksdhfsdk'
+        name: username
       })
       .then(function (response) {
         console.log(response);
+        setInterval(maintainServerConnection, 5000);
+        getChatMessages();
       })
       .catch(function (error) {
         console.log(error);
+        enterChat();
       });
-}*/
+}
+
+function maintainServerConnection(){
+    axios.post("https://mock-api.driven.com.br/api/v4/uol/status", { name: username });
+}
 
 function getChatMessages(){
     let promisse = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
@@ -37,7 +44,6 @@ function getChatMessages(){
 }
 
 function renderChatMessages(messages){
-    console.log(messages.data);
     let main = document.querySelector("main");
     for(let i = 0; i < messages.data.length; i++){
         main.append(renderMessageHTMLFormat(messages.data[i]));
@@ -84,5 +90,4 @@ function renderMessageHTMLFormat(message) {
     return div;
 }
 
-getChatMessages();
-//intializeServerConection();
+enterChat();

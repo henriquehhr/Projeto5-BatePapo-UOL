@@ -36,6 +36,7 @@ header ion-icon {
 main {
     background-color: #F3F3F3;
     margin-top: 106px;
+    margin-bottom: 84px;
     display: flex;
     flex-direction: column;
     gap: 4px;
