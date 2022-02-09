@@ -95,18 +95,20 @@ footer ion-icon {
 }
 
 .dark-overlay {
-    transition: all .7s ease;
+    transition: background-color .7s ease;
 }
 
 .dark-overlay--active {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.dark-overlay--active--front {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: black;
-    opacity: 0.7;
-    z-index:1;
+    z-index: 1;
 }
 
 aside {

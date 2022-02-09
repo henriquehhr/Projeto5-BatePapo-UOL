@@ -1,10 +1,19 @@
+const sidebar = document.querySelector("aside");
+const darkOverlay = document.querySelector(".dark-overlay");
+
 
 function openSidebar(){
-    document.querySelector("aside").classList.add("aside--slide");
-    document.querySelector(".dark-overlay").classList.add("dark-overlay--active");
+    sidebar.classList.add("aside--slide");
+    darkOverlay.classList.add("dark-overlay--active--front");
+    darkOverlay.classList.add("dark-overlay--active");
 }
 
 function closeSidebar(){
-    document.querySelector("aside").classList.remove("aside--slide");
-    document.querySelector(".dark-overlay").classList.remove("dark-overlay--active");
+    sidebar.classList.remove("aside--slide");
+    darkOverlay.classList.remove("dark-overlay--active");
+    setTimeout(function (){
+        if(!sidebar.classList.contains("aside--slide")){
+            darkOverlay.classList.remove("dark-overlay--active--front");
+        }
+    }, 700);
 }
