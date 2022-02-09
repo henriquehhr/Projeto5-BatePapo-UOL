@@ -6,11 +6,13 @@ function openSidebar(){
     sidebar.classList.add("aside--slide");
     darkOverlay.classList.add("dark-overlay--active--front");
     darkOverlay.classList.add("dark-overlay--active");
+    document.body.classList.add("body--remove-y-scroll");
 }
 
 function closeSidebar(){
     sidebar.classList.remove("aside--slide");
     darkOverlay.classList.remove("dark-overlay--active");
+    document.body.classList.remove("body--remove-y-scroll");
     setTimeout(function (){
         if(!sidebar.classList.contains("aside--slide")){
             darkOverlay.classList.remove("dark-overlay--active--front");
