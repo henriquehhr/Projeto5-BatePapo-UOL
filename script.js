@@ -2,7 +2,7 @@ const sidebar = document.querySelector("aside");
 const darkOverlay = document.querySelector(".dark-overlay");
 let username;
 let messageVisibility;
-let messageRecipient;
+let messageRecipient = "Todos";
 let lastMessageRecipient;
 
 function openSidebar(){
@@ -29,7 +29,7 @@ function enterChat(){
         name: username
       })
       .then(function (response) {
-        console.log(response);
+        //console.log(response);
         setInterval(maintainServerConnection, 5000);
         getChatMessages();
         getOnlineChatUsers();
@@ -50,7 +50,7 @@ function getChatMessages(){
 }
 
 function renderChatMessages(messages){
-    console.log(messages.data);
+    //console.log(messages.data);
     let main = document.querySelector("main");
     for(let i = 0; i < messages.data.length; i++){
         main.append(renderMessageHTMLFormat(messages.data[i]));
@@ -138,7 +138,7 @@ function setMessageRecipient(clickedRecipient) {
     lastMessageRecipient = clickedRecipient;
 
     if(messageRecipient === "Todos"){
-        setMessageVisibility(document.querySelector("aside .visibility li:last-child"));
+        setMessageVisibility(document.querySelector("aside .visibility li:first-child"));
     }
 }
 
@@ -153,6 +153,24 @@ function setMessageVisibility(clickedVisibility) {
     }
     
     clickedVisibility.querySelector(".checkmark").classList.remove("hidden");
+}
+
+function sendMessage(){
+    if(document.querySelector("input").value === ""){
+        return;
+    }
+    let message = {
+        from: username,
+        to: messageRecipient,
+        text: document.querySelector("input").value,
+        type: "message"
+    };
+    if(messageVisibility === "Reservadamente"){
+        message.type = "private_message";
+    }
+    console.log(message);
+    axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", message);
+    document.querySelector("input").value = "";
 }
 
 enterChat();
