@@ -121,7 +121,6 @@ footer ion-icon {
 }
 
 aside {
-    padding: 25px 17px;
     position: fixed;
     top: 0;
     right: -295px;
@@ -132,11 +131,17 @@ aside {
     transition: all .5s ease;
 }
 
+.sidebar-container {
+    padding: 25px 17px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
 aside.aside--slide {
     right: 0;
 }
 
-aside > p {
+aside .sidebar-container > p {
     font-family: Roboto;
     font-weight: bold;
     font-size: 16px;
@@ -151,6 +156,14 @@ aside ul {
 
 aside ul li {
     margin-bottom: 12px;
+}
+
+aside .visibility {
+    margin-bottom: 0;
+}
+
+aside .visibility li:last-child {
+    margin-bottom: 0;
 }
 
 aside ul ion-icon:first-of-type {
