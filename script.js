@@ -186,4 +186,10 @@ function sendMessage(){
     
 }
 
+document.querySelector("input").addEventListener('keydown', function (e) {
+    if(e.keyCode==13) {
+        sendMessage();
+    }
+});
+
 enterChat();
