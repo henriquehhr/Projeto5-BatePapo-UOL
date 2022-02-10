@@ -1,6 +1,9 @@
 const sidebar = document.querySelector("aside");
 const darkOverlay = document.querySelector(".dark-overlay");
 let username;
+let messageVisibility;
+let messageRecipient;
+let lastMessageRecipient;
 
 function openSidebar(){
     sidebar.classList.add("aside--slide");
@@ -47,6 +50,7 @@ function getChatMessages(){
 }
 
 function renderChatMessages(messages){
+    console.log(messages.data);
     let main = document.querySelector("main");
     for(let i = 0; i < messages.data.length; i++){
         main.append(renderMessageHTMLFormat(messages.data[i]));
@@ -101,7 +105,7 @@ function getOnlineChatUsers(){
 function renderOnlineChatUsers(chatUsers){
     const contacts = document.querySelector(".contacts");
     contacts.innerHTML = `
-    <li>
+    <li onclick="setMessageRecipient(this)">
         <ion-icon name="people"></ion-icon>
         <p>Todos</p>
         <ion-icon name="checkmark-sharp" class="checkmark"></ion-icon>                                
@@ -111,15 +115,27 @@ function renderOnlineChatUsers(chatUsers){
             contacts.innerHTML += renderChatUserHTMLFormat(chatUsers.data[i]);
         }
     }
+
+    lastMessageRecipient = document.querySelector("aside ul li");
 }
 
 function renderChatUserHTMLFormat(chatUser){
     return `
-    <li>
+    <li onclick="setMessageRecipient(this)">
         <ion-icon name="person-circle"></ion-icon>
         <p>${chatUser.name}</p>
         <ion-icon name="checkmark-sharp" class="checkmark hidden"></ion-icon>                                
     </li>`; 
+}
+
+function setMessageRecipient(clickedRecipient) {
+    if(clickedRecipient === lastMessageRecipient){
+        return;
+    }
+    messageRecipient = clickedRecipient.querySelector("p").innerText;
+    clickedRecipient.querySelector(".checkmark").classList.remove("hidden");
+    lastMessageRecipient.querySelector(".checkmark").classList.add("hidden");
+    lastMessageRecipient = clickedRecipient;
 }
 
 enterChat();

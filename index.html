@@ -41,20 +41,20 @@
             <ion-icon name="paper-plane-outline"></ion-icon>        
         </footer>
     <div class="dark-overlay" onclick="closeSidebar()"></div>
-    <aside class=>
+    <aside>
         <p>Escolha um contato para enviar mensagem:</p>
         <ul class="contacts">
-            <li>
+            <li onclick="setMessageRecipient(this)">
                 <ion-icon name="people"></ion-icon>
                 <p>Todos</p>
-                <ion-icon name="checkmark-sharp" class="checkmark"></ion-icon>                                
+                <ion-icon name="checkmark-sharp" class="checkmark hidden"></ion-icon>                                
             </li>
-            <li>
+            <li onclick="setMessageRecipient(this)">
                 <ion-icon name="person-circle"></ion-icon>
                 <p>João</p>
                 <ion-icon name="checkmark-sharp" class="checkmark hidden"></ion-icon>                                
             </li>
-            <li>
+            <li onclick="setMessageRecipient(this)">
                 <ion-icon name="person-circle"></ion-icon>
                 <p>Maria</p>
                 <ion-icon name="checkmark-sharp" class="checkmark hidden"></ion-icon>                                
