@@ -9,13 +9,13 @@ function openSidebar(){
     sidebar.classList.add("aside--slide");
     darkOverlay.classList.add("dark-overlay--active--front");
     darkOverlay.classList.add("dark-overlay--active");
-    document.body.classList.add("body--remove-y-scroll");
+    document.querySelector("main").classList.add("messages--remove-vertical-scroll");
 }
 
 function closeSidebar(){
     sidebar.classList.remove("aside--slide");
     darkOverlay.classList.remove("dark-overlay--active");
-    document.body.classList.remove("body--remove-y-scroll");
+    document.querySelector("main").classList.remove("messages--remove-vertical-scroll");
     setTimeout(function (){
         if(!sidebar.classList.contains("aside--slide")){
             darkOverlay.classList.remove("dark-overlay--active--front");
@@ -136,6 +136,10 @@ function setMessageRecipient(clickedRecipient) {
     clickedRecipient.querySelector(".checkmark").classList.remove("hidden");
     lastMessageRecipient.querySelector(".checkmark").classList.add("hidden");
     lastMessageRecipient = clickedRecipient;
+
+    if(messageRecipient === "Todos"){
+        setMessageVisibility(document.querySelector("aside .visibility li:last-child"));
+    }
 }
 
 function setMessageVisibility(clickedVisibility) {
