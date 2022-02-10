@@ -47,11 +47,13 @@ function maintainServerConnection(){
 function getChatMessages(){
     let promisse = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
     promisse.then(renderChatMessages);
+    setInterval(updateChatMessages, 3000);
 }
 
 function renderChatMessages(messages){
     //console.log(messages.data);
     let main = document.querySelector("main");
+    main.innerHTML = "";
     for(let i = 0; i < messages.data.length; i++){
         main.append(renderMessageHTMLFormat(messages.data[i]));
     }
@@ -95,6 +97,11 @@ function renderMessageHTMLFormat(message) {
 
     div.append(pMessage);
     return div;
+}
+
+function updateChatMessages(){
+    let promisse = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+    promisse.then(renderChatMessages);
 }
 
 function getOnlineChatUsers(){
@@ -169,8 +176,14 @@ function sendMessage(){
         message.type = "private_message";
     }
     console.log(message);
-    axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", message);
     document.querySelector("input").value = "";
+    let promisse = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", message);
+    promisse.then(updateChatMessages);
+    promisse.catch(function() {
+        alert("Erro ao enviar mensagem ao servidor. Necessário recarregar página.");
+        window.location.reload();
+    });
+    
 }
 
 enterChat();
