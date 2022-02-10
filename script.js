@@ -138,4 +138,17 @@ function setMessageRecipient(clickedRecipient) {
     lastMessageRecipient = clickedRecipient;
 }
 
+function setMessageVisibility(clickedVisibility) {
+    if(clickedVisibility === document.querySelector("aside .visibility li:first-child")){
+        messageVisibility = "Público";
+        document.querySelector("aside .visibility li:last-child .checkmark").classList.add("hidden");
+    }
+    else {
+        messageVisibility = "Reservadamente";
+        document.querySelector("aside .visibility li:first-child .checkmark").classList.add("hidden");
+    }
+    
+    clickedVisibility.querySelector(".checkmark").classList.remove("hidden");
+}
+
 enterChat();
