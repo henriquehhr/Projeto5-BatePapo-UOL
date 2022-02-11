@@ -1,7 +1,7 @@
 const sidebar = document.querySelector("aside");
 const darkOverlay = document.querySelector(".dark-overlay");
 let username;
-let messageVisibility;
+let messageVisibility = "Público";
 let messageRecipient = "Todos";
 let lastMessageRecipient;
 let lastMessage = null
@@ -172,16 +172,24 @@ function setMessageRecipient(clickedRecipient) {
     if(messageRecipient === "Todos"){
         setMessageVisibility(document.querySelector("aside .visibility li:first-child"));
     }
+
+    if (messageVisibility === "Público"){
+        document.querySelector("footer p").innerText = ` Enviando para ${messageRecipient} (publicamente)`;
+    } else {
+        document.querySelector("footer p").innerText = ` Enviando para ${messageRecipient} (reservadamente)`;
+    }
 }
 
 function setMessageVisibility(clickedVisibility) {
     if(clickedVisibility === document.querySelector("aside .visibility li:first-child")){
         messageVisibility = "Público";
         document.querySelector("aside .visibility li:last-child .checkmark").classList.add("hidden");
+        document.querySelector("footer p").innerText = `Enviando para ${messageRecipient} (publicamente)`;
     }
     else {
         messageVisibility = "Reservadamente";
         document.querySelector("aside .visibility li:first-child .checkmark").classList.add("hidden");
+        document.querySelector("footer p").innerText = `Enviando para ${messageRecipient} (reservadamente)`;
     }
     
     clickedVisibility.querySelector(".checkmark").classList.remove("hidden");

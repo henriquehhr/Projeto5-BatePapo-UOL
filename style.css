@@ -77,12 +77,12 @@ main {
 
 footer {
     background-color: #FFFFFF;
-    padding: 27px 18px;
-    display: flex;
+    padding: 27px 18px 5px;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
 }
 
 footer input {
@@ -92,13 +92,26 @@ footer input {
     font-family: Roboto;
     font-size: 18px;
     line-height: 21px;
+    font-weight: 400;
 }
 
 footer input::placeholder {
     font-style: italic;
+    color: black;
+}
+
+footer p {
+    font-family: Roboto;
+    font-size: 14px;
+    line-height: 25px;
+    font-weight: 300;
+    color:gray;
 }
 
 footer ion-icon {
+    position: fixed;
+    bottom: 27px;
+    right: 18px;
     width: 26px;
     height: 26px;
 }
