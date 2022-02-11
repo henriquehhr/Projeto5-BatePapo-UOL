@@ -187,7 +187,8 @@ function sendMessage(){
 }
 
 document.querySelector("input").addEventListener('keydown', function (e) {
-    if(e.keyCode==13) {
+    let keyPressed = e.key || e.keyCode;
+    if(keyPressed === "Enter" || keyPressed === 13) {
         sendMessage();
     }
 });
