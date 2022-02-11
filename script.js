@@ -75,9 +75,7 @@ function renderChatMessages(messages){
         let isUserSenderOrRecipient = (newMessages[i].to === username || newMessages[i].to ==="Todos" || newMessages[i].from === username)
         if(!isPrivateMessage || (isPrivateMessage && isUserSenderOrRecipient)){
             main.append(renderMessageHTMLFormat(newMessages[i]));
-            if(lastMessage === null){
-                main.lastChild.scrollIntoView();
-            }
+            main.lastChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     }
 
