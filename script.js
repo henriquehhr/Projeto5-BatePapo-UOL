@@ -55,7 +55,11 @@ function renderChatMessages(messages){
     let main = document.querySelector("main");
     main.innerHTML = "";
     for(let i = 0; i < messages.data.length; i++){
-        main.append(renderMessageHTMLFormat(messages.data[i]));
+        let isPrivateMessage = (messages.data[i].type === "private_message");
+        let isUserSenderORRecipient = (messages.data[i].to === username || messages.data[i].to ==="Todos" || messages.data[i].from === username)
+        if(!isPrivateMessage || (isPrivateMessage && isUserSenderORRecipient)){
+            main.append(renderMessageHTMLFormat(messages.data[i]));
+        }
     }
 }
 
@@ -175,7 +179,6 @@ function sendMessage(){
     if(messageVisibility === "Reservadamente"){
         message.type = "private_message";
     }
-    console.log(message);
     document.querySelector("input").value = "";
     let promisse = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", message);
     promisse.then(updateChatMessages);
