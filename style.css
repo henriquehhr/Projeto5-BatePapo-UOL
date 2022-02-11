@@ -167,8 +167,38 @@ aside ul {
     margin-bottom: 30px;
 }
 
+aside .contacts p, aside .visibility p {
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+aside .contacts ion-icon {
+    font-size: 25px;
+}
+
 aside ul li {
-    margin-bottom: 12px;
+    /* transition: max-height 2s ease,
+        opacity 1s ease,
+        margin-bottom 3s ease; */
+    transition: all 1s ease;
+    /* background-color: white; */
+    max-height: 300px;
+    /* padding: 6px 0; */
+    /* margin-bottom: 12px; */
+}
+
+.div-6-pixels {
+    height: 37px;
+    width: 0px;
+}
+
+aside ul li.message--slide {
+    /* background-color: #28BB25; */
+    opacity: 0;
+    max-height: 0px;
+    /* padding: 0 0; */
+    /* margin-bottom: 0; */
 }
 
 aside .visibility {
@@ -183,10 +213,6 @@ aside ul ion-icon:first-of-type {
     margin-right: 7px;
 }
 
-aside .contacts ion-icon {
-    width: 25px;
-    height: 25px;
-}
 
 aside .visibility ion-icon {
     width: 22px;
@@ -199,14 +225,9 @@ aside .checkmark {
     color: #28BB25;
 }
 
-aside .contacts p, aside .visibility p {
-    font-family: Roboto;
-    font-size: 16px;
-    line-height: 19px;
-}
-
 aside .visibility li, aside .contacts li {
     display:flex;
+    align-items: center;
     flex-grow: 1;
 }
 

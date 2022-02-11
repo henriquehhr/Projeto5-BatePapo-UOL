@@ -26,17 +26,22 @@
     <div class="dark-overlay" onclick="closeSidebar()"></div>
     <aside>
         <div class="sidebar-container">
+            <!-- <button onclick="(newChatUser())">NOVO</button>
+            <button onclick="(clearUsers())">APAGAR</button>
+            <button onclick="(apagarOPrimeiro())">TESTE</button> -->
             <p>Escolha um contato para enviar mensagem:</p>
             <ul class="contacts">
             </ul>
             <p>Escolha a visibilidade:</p>
             <ul class="visibility">
                 <li onclick="setMessageVisibility(this)">
+                    <div class="div-6-pixels"></div>
                     <ion-icon name="lock-open"></ion-icon>
                     <p>Público</p>
                     <ion-icon name="checkmark-sharp" class="checkmark"></ion-icon> 
                 </li>
                 <li onclick="setMessageVisibility(this)">
+                    <div class="div-6-pixels"></div>
                     <ion-icon name="lock-closed"></ion-icon>
                     <p>Reservadamente</p>
                     <ion-icon name="checkmark-sharp" class="hidden checkmark"></ion-icon>
