@@ -4,6 +4,7 @@ let username;
 let messageVisibility;
 let messageRecipient = "Todos";
 let lastMessageRecipient;
+let lastMessage = null
 
 function openSidebar(){
     sidebar.classList.add("aside--slide");
@@ -51,15 +52,37 @@ function getChatMessages(){
 }
 
 function renderChatMessages(messages){
-    //console.log(messages.data);
     let main = document.querySelector("main");
-    main.innerHTML = "";
-    for(let i = 0; i < messages.data.length; i++){
-        let isPrivateMessage = (messages.data[i].type === "private_message");
-        let isUserSenderORRecipient = (messages.data[i].to === username || messages.data[i].to ==="Todos" || messages.data[i].from === username)
-        if(!isPrivateMessage || (isPrivateMessage && isUserSenderORRecipient)){
-            main.append(renderMessageHTMLFormat(messages.data[i]));
+    let newMessages = [];
+    if(lastMessage === null){
+        newMessages = messages.data;
+        newMessages.reverse();
+    } else {
+        for(let i = messages.data.length - 1; i >= 0; i--){
+            if(lastMessage.from === messages.data[i].from &&
+                lastMessage.to === messages.data[i].to &&
+                lastMessage.text === messages.data[i].text &&
+                lastMessage.type === messages.data[i].type &&
+                lastMessage.time === messages.data[i].time){
+                break;
+            }
+            newMessages.push(messages.data[i]);
         }
+    }
+
+    for(let i = newMessages.length - 1; i >= 0; i--){
+        let isPrivateMessage = (newMessages[i].type === "private_message");
+        let isUserSenderOrRecipient = (newMessages[i].to === username || newMessages[i].to ==="Todos" || newMessages[i].from === username)
+        if(!isPrivateMessage || (isPrivateMessage && isUserSenderOrRecipient)){
+            main.append(renderMessageHTMLFormat(newMessages[i]));
+            if(lastMessage === null){
+                main.lastChild.scrollIntoView();
+            }
+        }
+    }
+
+    if(newMessages.length !== 0){
+        lastMessage = newMessages[0];
     }
 }
 
