@@ -2,6 +2,62 @@
     box-sizing: border-box;
 }
 
+.login-page {
+    background: #FFFFFF;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 72px;
+    transition: all 2s ease;
+}
+
+.login-page--hidden{
+    opacity: 0;
+}
+
+.login-page img {
+    margin-bottom: 40%;
+}
+
+.login-page input {
+    background: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    width: 261px;
+    height: 54px;
+
+    font-family: Roboto;
+    font-weight: normal;
+    font-size: 18px;
+    text-align: center;
+    color: #AEAEAE;
+}
+
+.login-page button {
+    background: #E7E7E7;
+    border-radius: 9px;
+    border: none;
+    width: 109px;
+    height: 45px;
+    font-family: Roboto;
+    font-size: 18px;
+    text-align: center;
+    color: #696969;
+}
+
+.login-page .loading-gif {
+    width: 70%;
+    height: auto;
+}
+
+
 main {
     height: auto;
 }

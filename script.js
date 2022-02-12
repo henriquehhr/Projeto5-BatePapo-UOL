@@ -25,20 +25,35 @@ function closeSidebar(){
 }
 
 function enterChat(){
-    username = prompt("Qual o seu lindo nome?");
+    username = document.querySelector("#login").value;
+    if(username === ""){
+        alert("Por favor, informe o seu nome de usuário para entrar no chat!");
+        return;
+    }
+    document.querySelector(".login-page input").classList.add("hidden");
+    document.querySelector(".login-page button").classList.add("hidden");
+    document.querySelector(".login-page .loading-gif").classList.remove("hidden");
     axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {
         name: username
       })
       .then(function (response) {
-        //console.log(response);
         setInterval(maintainServerConnection, 5000);
         getChatMessages();
         getOnlineChatUsers();
       })
       .catch(function (error) {
         console.log(error);
-        enterChat();
+        alert("Favor escolher outro nome pois este já está em uso!");
+        document.querySelector(".login-page .loading-gif").classList.add("hidden");
+        document.querySelector("#login").value = "";
+        document.querySelector(".login-page input").classList.remove("hidden");
+        document.querySelector(".login-page button").classList.remove("hidden");
       });
+}
+
+function hideLoginPage(){
+    document.querySelector(".login-page").classList.add("login-page--hidden");
+    setTimeout(function () {document.querySelector(".login-page").classList.add("hidden")}, 3000);
 }
 
 function maintainServerConnection(){
@@ -87,6 +102,8 @@ function renderChatMessages(messages){
     if(newMessages.length !== 0){
         lastMessage = newMessages[0];
     }
+    
+    hideLoginPage();
 }
 
 function renderMessageHTMLFormat(message) {
@@ -203,19 +220,19 @@ function setMessageVisibility(clickedVisibility) {
 }
 
 function sendMessage(){
-    if(document.querySelector("input").value === ""){
+    if(document.querySelector("#message-input").value === ""){
         return;
     }
     let message = {
         from: username,
         to: messageRecipient,
-        text: document.querySelector("input").value,
+        text: document.querySelector("#message-input").value,
         type: "message"
     };
     if(messageVisibility === "Reservadamente"){
         message.type = "private_message";
     }
-    document.querySelector("input").value = "";
+    document.querySelector("#message-input").value = "";
     let promisse = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", message);
     promisse.then(updateChatMessages);
     promisse.catch(function() {
@@ -282,11 +299,9 @@ function apagarOPrimeiro() {
     setTimeout(function () {li.remove()}, 2050);
 }
 
-document.querySelector("input").addEventListener('keydown', function (e) {
+document.querySelector("#message-input").addEventListener('keydown', function (e) {
     let keyPressed = e.key || e.keyCode;
     if(keyPressed === "Enter" || keyPressed === 13) {
         sendMessage();
     }
 });
-
-enterChat();

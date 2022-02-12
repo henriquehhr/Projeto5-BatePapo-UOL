@@ -12,6 +12,12 @@
     <title>Bate-papo UOL</title>
 </head>
 <body>
+    <section class="login-page">
+        <img src="images/logo.png" alt="Bate-papo UOL">
+        <input type="text" name="login" id="login" placeholder="Digite seu nome" data-identifier="enter-name">
+        <button onclick="enterChat()" data-identifier="start">Entrar</button>
+        <img src="images/loading.gif" alt="carregando" class="loading-gif hidden">
+    </section>
         <header>
             <img src="images/logo.png" alt="logo do UOL">
             <ion-icon name="people" onClick="openSidebar()"></ion-icon>        
@@ -19,7 +25,7 @@
         <main>
         </main>
         <footer>
-            <input type="text" name="" id="" placeholder="Escreva aqui...">
+            <input type="text" name="message-input" id="message-input" placeholder="Escreva aqui...">
             <p>Enviando para Todos (publicamente)</p>
             <ion-icon name="paper-plane-outline" onclick="sendMessage()" data-identifier="send-message"></ion-icon>        
         </footer>
@@ -55,30 +61,3 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
-
-<!--
-<ion-icon name="people"></ion-icon>
-<ion-icon name="paper-plane-outline"></ion-icon>
-<ion-icon name="person-circle"></ion-icon>
-<ion-icon name="lock-closed"></ion-icon>
-<ion-icon name="lock-open"></ion-icon>
-<ion-icon name="checkmark-sharp"></ion-icon> -->
-
-<!-- <div class="message message--status">
-    <p><span class="message__time">(09:21:45) </span><span><strong>João </strong>entra na sala...</span></p>
-</div>
-<div class="message">
-    <p><span class="message__time">(09:21:45) </span><span><strong>João </strong>para <strong>Todos: </strong>Bom dia</span></p>
-</div>
-<div class="message">
-    <p><span class="message__time">(09:21:45) </span><span><strong>Maria </strong>para <strong>João: </strong>Oi João :)</span></p>
-</div>
-<div class="message message--DM">
-    <p><span class="message__time">(09:21:45) </span><span><strong>João </strong>reservadamente para <strong>Maria: </strong>Oi gatinha quer tc?</span></p>
-</div>
-<div class="message message--status">
-    <p><span class="message__time">(09:21:45) </span><span><strong>Maria </strong>sai da sala...</span></p>
-</div>
-<div class="message">
-    <p><span class="message__time">(09:21:45) </span><span><strong>João </strong>para <strong>Todos: </strong>Bom diaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  hkl h k hkl jh kljh l kjh  kjhl kjh lk jhl kjh kj hlkj hl kjhlk jhl kjhlkjhlkjhlkjh   klj hl kjhkjh kjhlkjhl kjhljkhlk</span></p>
-</div> -->
