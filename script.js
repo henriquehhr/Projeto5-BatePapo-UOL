@@ -124,8 +124,9 @@ function renderMessageHTMLFormat(message) {
         }
         default: console.log("deu erro");
     }
-
     div.append(pMessage);
+
+    div.setAttribute("data-identifier", "message");
     return div;
 }
 
@@ -158,7 +159,7 @@ function renderOnlineChatUsers(chatUsers){
 
 function renderChatUserHTMLFormat(chatUser){
     return `
-    <li onclick="setMessageRecipient(this)">
+    <li onclick="setMessageRecipient(this)" data-identifier="participant">
         <div class="div-6-pixels"></div>
         <ion-icon name="person-circle"></ion-icon>
         <p>${chatUser.name}</p>
@@ -243,6 +244,7 @@ function newChatUser(newChatUserName){
     check.classList.add("hidden");
     li.classList.add("message--slide");
     li.setAttribute("onclick", "setMessageRecipient(this)");
+    li.setAttribute("data-identifier", "participant");
 
     li.append(div1, ion, p, check);
     contacts.append(li);

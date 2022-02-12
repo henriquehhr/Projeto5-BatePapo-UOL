@@ -21,7 +21,7 @@
         <footer>
             <input type="text" name="" id="" placeholder="Escreva aqui...">
             <p>Enviando para Todos (publicamente)</p>
-            <ion-icon name="paper-plane-outline" onclick="sendMessage()"></ion-icon>        
+            <ion-icon name="paper-plane-outline" onclick="sendMessage()" data-identifier="send-message"></ion-icon>        
         </footer>
     <div class="dark-overlay" onclick="closeSidebar()"></div>
     <aside>
@@ -34,13 +34,13 @@
             </ul>
             <p>Escolha a visibilidade:</p>
             <ul class="visibility">
-                <li onclick="setMessageVisibility(this)">
+                <li onclick="setMessageVisibility(this)" data-identifier="visibility">
                     <div class="div-6-pixels"></div>
                     <ion-icon name="lock-open"></ion-icon>
                     <p>Público</p>
                     <ion-icon name="checkmark-sharp" class="checkmark"></ion-icon> 
                 </li>
-                <li onclick="setMessageVisibility(this)">
+                <li onclick="setMessageVisibility(this)" data-identifier="visibility">
                     <div class="div-6-pixels"></div>
                     <ion-icon name="lock-closed"></ion-icon>
                     <p>Reservadamente</p>
