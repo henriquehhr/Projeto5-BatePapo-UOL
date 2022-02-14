@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 72px;
-    transition: all 2s ease;
+    transition: all 1s ease;
 }
 
 .login-page--hidden{
@@ -37,6 +37,9 @@
     font-weight: normal;
     font-size: 18px;
     text-align: center;
+}
+
+.login-page input::placeholder {
     color: #AEAEAE;
 }
 
@@ -64,7 +67,6 @@ main {
 
 .messages--remove-vertical-scroll {
     overflow-y: hidden;
-    height: calc(100vh - 190px);
 }
 
 .hidden {
@@ -146,7 +148,7 @@ footer {
 }
 
 footer input {
-    width: 100%;
+    width: calc(100% - 35px);
     border: none;
     outline: none;
     font-family: Roboto;
@@ -202,6 +204,7 @@ aside {
     background-color: #FFFFFF;
     width: 259px;
     transition: all .5s ease;
+    overflow: auto;
 }
 
 .sidebar-container {
@@ -231,6 +234,9 @@ aside .contacts p, aside .visibility p {
     font-family: Roboto;
     font-size: 16px;
     line-height: 19px;
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 aside .contacts ion-icon {
@@ -238,14 +244,8 @@ aside .contacts ion-icon {
 }
 
 aside ul li {
-    /* transition: max-height 2s ease,
-        opacity 1s ease,
-        margin-bottom 3s ease; */
     transition: all 1s ease;
-    /* background-color: white; */
     max-height: 300px;
-    /* padding: 6px 0; */
-    /* margin-bottom: 12px; */
 }
 
 .div-6-pixels {
@@ -254,11 +254,8 @@ aside ul li {
 }
 
 aside ul li.message--slide {
-    /* background-color: #28BB25; */
     opacity: 0;
     max-height: 0px;
-    /* padding: 0 0; */
-    /* margin-bottom: 0; */
 }
 
 aside .visibility {
@@ -269,7 +266,7 @@ aside .visibility li:last-child {
     margin-bottom: 0;
 }
 
-aside ul ion-icon:first-of-type {
+aside ul ion-icon {
     margin-right: 7px;
 }
 
@@ -280,9 +277,8 @@ aside .visibility ion-icon {
 }
 
 aside .checkmark {
-    width: 10px;
-    height: 10px;
-    color: #28BB25;
+    width: 13px;
+    height: 11px;
 }
 
 aside .visibility li, aside .contacts li {

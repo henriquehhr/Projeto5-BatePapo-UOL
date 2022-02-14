@@ -5,18 +5,19 @@ let messageVisibility = "Público";
 let messageRecipient = "Todos";
 let lastMessageRecipient;
 let lastMessage = null
+let primeirasMensagensPegas = false;
 
 function openSidebar(){
     sidebar.classList.add("aside--slide");
     darkOverlay.classList.add("dark-overlay--active--front");
     darkOverlay.classList.add("dark-overlay--active");
-    document.querySelector("main").classList.add("messages--remove-vertical-scroll");
+    document.body.classList.add("messages--remove-vertical-scroll");
 }
 
 function closeSidebar(){
     sidebar.classList.remove("aside--slide");
     darkOverlay.classList.remove("dark-overlay--active");
-    document.querySelector("main").classList.remove("messages--remove-vertical-scroll");
+    document.body.classList.remove("messages--remove-vertical-scroll");
     setTimeout(function (){
         if(!sidebar.classList.contains("aside--slide")){
             darkOverlay.classList.remove("dark-overlay--active--front");
@@ -38,7 +39,6 @@ function enterChat(){
       })
       .then(function (response) {
         setInterval(maintainServerConnection, 5000);
-        getChatMessages();
         getOnlineChatUsers();
       })
       .catch(function (error) {
@@ -53,7 +53,7 @@ function enterChat(){
 
 function hideLoginPage(){
     document.querySelector(".login-page").classList.add("login-page--hidden");
-    setTimeout(function () {document.querySelector(".login-page").classList.add("hidden")}, 3000);
+    setTimeout(function () {document.querySelector(".login-page").classList.add("hidden")}, 1000);
 }
 
 function maintainServerConnection(){
@@ -91,19 +91,21 @@ function renderChatMessages(messages){
         if(!isPrivateMessage || (isPrivateMessage && isUserSenderOrRecipient)){
             main.append(renderMessageHTMLFormat(newMessages[i]));
             main.lastChild.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            if(newMessages[i].type === "status" && newMessages[i].text === "entra na sala...") {
-                newChatUser(newMessages[i].from);
-            } else if (newMessages[i].type === "status" && newMessages[i].text === "sai da sala..."){
-                removeChatUser(newMessages[i].from);
-            }
+        }
+        if(newMessages[i].type === "status" && newMessages[i].text === "entra na sala..." && newMessages[i].from !== username && primeirasMensagensPegas) {
+            
+            newChatUser(newMessages[i].from);
+        } else if (newMessages[i].type === "status" && newMessages[i].text === "sai da sala..." && primeirasMensagensPegas){
+            removeChatUser(newMessages[i].from);
         }
     }
+
+    primeirasMensagensPegas = true;
 
     if(newMessages.length !== 0){
         lastMessage = newMessages[0];
     }
-    
-    hideLoginPage();
+    setTimeout(hideLoginPage, 1000);
 }
 
 function renderMessageHTMLFormat(message) {
@@ -139,7 +141,6 @@ function renderMessageHTMLFormat(message) {
             div.classList.add("message--DM");
             break;
         }
-        default: console.log("deu erro");
     }
     div.append(pMessage);
 
@@ -159,12 +160,8 @@ function getOnlineChatUsers(){
 
 function renderOnlineChatUsers(chatUsers){
     const contacts = document.querySelector(".contacts");
-    contacts.innerHTML = `
-    <li onclick="setMessageRecipient(this)">
-        <ion-icon name="people"></ion-icon>
-        <p>Todos</p>
-        <ion-icon name="checkmark-sharp" class="checkmark"></ion-icon>                                
-    </li>`;
+    contacts.innerHTML = renderChatUserHTMLFormat({name: "Todos"});
+    contacts.querySelector("li .checkmark").classList.remove("hidden");
     for(let i = 0; i < chatUsers.data.length; i++){
         if(chatUsers.data[i].name !== username){
             contacts.innerHTML += renderChatUserHTMLFormat(chatUsers.data[i]);
@@ -172,16 +169,11 @@ function renderOnlineChatUsers(chatUsers){
     }
 
     lastMessageRecipient = document.querySelector("aside ul li");
+    getChatMessages();
 }
 
 function renderChatUserHTMLFormat(chatUser){
-    return `
-    <li onclick="setMessageRecipient(this)" data-identifier="participant">
-        <div class="div-6-pixels"></div>
-        <ion-icon name="person-circle"></ion-icon>
-        <p>${chatUser.name}</p>
-        <ion-icon name="checkmark-sharp" class="checkmark hidden"></ion-icon>                                
-    </li>`; 
+    return `<li onclick="setMessageRecipient(this)" data-identifier="participant"><div class="div-6-pixels"></div><ion-icon name="person-circle"></ion-icon><p>${chatUser.name}</p><img src="images/checkmark.png" alt="checkmark" class="checkmark hidden"></li>`; 
 }
 
 function setMessageRecipient(clickedRecipient) {
@@ -233,7 +225,7 @@ function sendMessage(){
         message.type = "private_message";
     }
     document.querySelector("#message-input").value = "";
-    let promisse = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", message);
+    const promisse = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", message);
     promisse.then(updateChatMessages);
     promisse.catch(function() {
         alert("Erro ao enviar mensagem ao servidor. Necessário recarregar página.");
@@ -243,20 +235,26 @@ function sendMessage(){
 }
 
 function newChatUser(newChatUserName){
+
+    let userList = document.querySelectorAll(".contacts li");
+    for(let i = 0; i < userList.length; i++){
+        if(userList[i].querySelector("p").innerText === newChatUserName){
+            return;
+        }
+    }
+
     const contacts = document.querySelector(".contacts");
     let li = document.createElement("li");
     let ion = document.createElement("ion-icon");
     let p = document.createElement("p");
-    let check = document.createElement("ion-icon");
+    let check = document.createElement("img");
     let div1 = document.createElement("div");
-    let div2 = document.createElement("div");
     
     div1.classList.add("div-6-pixels");
-    div2.classList.add("div-6-pixels");
 
     ion.setAttribute("name", "person-circle");
     p.innerText = newChatUserName;
-    check.setAttribute("name", "checkmark-sharp");
+    check.setAttribute("src", "images/checkmark.png");
     check.classList.add("checkmark");
     check.classList.add("hidden");
     li.classList.add("message--slide");
@@ -265,10 +263,11 @@ function newChatUser(newChatUserName){
 
     li.append(div1, ion, p, check);
     contacts.append(li);
-    setTimeout(function () {
-        const contacts = document.querySelector(".contacts");
-        contacts.lastChild.classList.remove("message--slide");
-    }, 250);
+    setTimeout(removeMessageSlide, 250, li);
+}
+
+function removeMessageSlide(li){
+    li.classList.remove("message--slide");
 }
 
 function removeChatUser(offlineChatUserName){
@@ -276,6 +275,7 @@ function removeChatUser(offlineChatUserName){
     for(let i = 0; i < contacts.length; i++){
         if(contacts[i].querySelector("p").innerText === offlineChatUserName){
             contacts[i].classList.add("message--slide");
+            contacts[i].setAttribute("onclick", "");
             setTimeout(function(){ contacts[i].remove() }, 1000);
             return;
         }
@@ -283,21 +283,12 @@ function removeChatUser(offlineChatUserName){
 
 }
 
-function clearUsers() {
-    let contacts = document.querySelector("aside .contacts");
-    contacts.lastChild.remove();
-    contacts.lastChild.remove();
-    contacts.lastChild.remove();
-    contacts.lastChild.remove();
-    contacts.lastChild.remove();
-}
-
-function apagarOPrimeiro() {
-    let contacts = document.querySelector("aside .contacts");
-    contacts.querySelector("li").classList.add("message--slide");
-    let li = contacts.querySelector("li");
-    setTimeout(function () {li.remove()}, 2050);
-}
+document.querySelector("#login").addEventListener('keydown', function (e) {
+    let keyPressed = e.key || e.keyCode;
+    if(keyPressed === "Enter" || keyPressed === 13) {
+        enterChat();
+    }
+});
 
 document.querySelector("#message-input").addEventListener('keydown', function (e) {
     let keyPressed = e.key || e.keyCode;
