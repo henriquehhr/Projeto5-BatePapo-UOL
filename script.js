@@ -262,7 +262,12 @@ function newChatUser(newChatUserName){
     li.setAttribute("data-identifier", "participant");
 
     li.append(div1, ion, p, check);
-    contacts.append(li);
+    for (let i = 1; i < userList.length; i++){
+        if(newChatUserName.toLowerCase() < userList[i].querySelector("p").innerText.toLowerCase()){
+            userList[i].before(li);
+            break;
+        }
+    }
     setTimeout(removeMessageSlide, 250, li);
 }
 
